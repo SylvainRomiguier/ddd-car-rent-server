@@ -1,0 +1,1 @@
+type ICreateUniqueId = () => string;

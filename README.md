@@ -22,7 +22,8 @@ The application directory contains all the use Cases :
 - **createCustomer**, **updateCustomer**;
 - **createVehicle**, **updateVehicle**;
 - **checkVehicleAvailability**, **bookVehicle**, **unbookVehicle**.
-  For now the Model cycle is fully describe and the others are in progress.
+
+For now the Model cycle is fully describe and the others are in progress.
 
 ## Clean Architecture
 
@@ -32,11 +33,11 @@ See DDD above.
 
 ### Use Cases and Interfaces for Use Cases : Input Port, Output Port, Repository - layer 1 : depend only on layer 0 objects and eventually objects from same layer -
 
-The application directory contains interfaces for Use Cases Input Ports (Use Cases interfaces to implement) and Output Ports (Presenters interfaces to implements).
+The application directory contains interfaces for Use Cases Input Ports (Use Cases interfaces to implement) and Output Ports (Presenters interfaces to implement).
 The repository interfaces are also present in each entity directory under _application/interfaces_.
 
-> **These interfaces are useful as no Use Case depends on outside implementations, just on interfaces. **
-> For the Use Cases implementations see DDD above.
+> **These interfaces are useful as no Use Case depends on outside implementations, just on interfaces.**
+> For Use Cases implementations see DDD above.
 
 ### Presenters implementations - layer 2 : depend on Entities and implements Use Cases Output Ports -
 
@@ -49,7 +50,7 @@ You will find the Output Ports Interfaces implementations in the Presenters dire
 
 ## Install and run
 
-After having downloaded the project, launch yarn install.
+After having downloaded the project, launch `yarn install`.
 
 ### Console
 
@@ -61,7 +62,7 @@ After having downloaded the project, launch yarn install.
 
 ## Conclusion
 
-As you can see the business logic are completely isolated from Console app or GraphQL server.
-If you want to add new repositories implementations - such as MongoDB, PostGreSQL, MariaDB, other API, etc. - or new controllers - Express, Fastify REST API, etc. -, this could be done only in the Infrastructure Layer without changing anything in the Business Logic Layers (Entities/Domain and Use Cases/Application).
+As you can see the business logic is completely isolated from **Console app** or **GraphQL server**.
+If you want to **add new repositories implementations** - such as MongoDB, PostGreSQL, MariaDB, other API, etc. - **or new controllers** - Express, Fastify REST API, etc. -, this could be done **only in the Infrastructure Layer** without changing anything in the Business Logic Layers (Entities/Domain and Use Cases/Application).
 
-If you want to add new Presenters, for example in XML or any format you need, create them without changing anything in Business Logic Layers. You will just have to inject them in your controller.
+If you want to **add new Presenters**, for example in XML or any format you need, create them without changing anything in Business Logic Layers. You will just have to **inject them in your controller**.

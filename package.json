@@ -4,7 +4,8 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "start": "npx ts-node index.ts",
+    "console": "npx ts-node console.ts",
+    "graphql": "npx ts-node graphql.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "devDependencies": {

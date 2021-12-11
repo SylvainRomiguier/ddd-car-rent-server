@@ -53,32 +53,19 @@ export class ModelGraphQLController {
         getModels: this.getAll,
       },
       Mutation: {
-        addModel: async (_: number, args: { name: string; brand: string }) =>
-          await this.createModel(args.name, args.brand),
-        updateModel: async (
-          _: any,
-          args: {
-            originalName: string;
-            originalBrand: string;
-            updatedName: string;
-            updatedBrand: string;
-          }
-        ) =>
-          await this.updateModel(
-            args.originalName,
-            args.originalBrand,
-            args.updatedName,
-            args.updatedBrand
-          ),
-        removeModel: async (_: any, args: { name: string; brand: string }) =>
-          await this.removeModel(args.name, args.brand),
+        addModel: this.createModel,
+        updateModel: this.updateModel,
+        removeModel: this.removeModel,
       },
     };
   }
 
-  createModel = async (name: string, brand: string): Promise<Response> => {
+  createModel = async (
+    _: any,
+    args: { name: string; brand: string }
+  ): Promise<Response> => {
     try {
-      const modelToAdd = new Model(name, brand);
+      const modelToAdd = new Model(args.name, args.brand);
       await this._createModel.handle(modelToAdd);
       return { success: true, message: "model added." };
     } catch (e) {
@@ -87,14 +74,17 @@ export class ModelGraphQLController {
     }
   };
   updateModel = async (
-    originalName: string,
-    originalBrand: string,
-    updatedName: string,
-    updatedBrand: string
+    _: any,
+    args: {
+      originalName: string;
+      originalBrand: string;
+      updatedName: string;
+      updatedBrand: string;
+    }
   ): Promise<Response> => {
     try {
-      const modelToRemove = new Model(originalName, originalBrand);
-      const modelToAdd = new Model(updatedName, updatedBrand);
+      const modelToRemove = new Model(args.originalName, args.originalBrand);
+      const modelToAdd = new Model(args.updatedName, args.updatedBrand);
       await this._removeModel.handle(modelToRemove);
       await this._createModel.handle(modelToAdd);
       return { success: true, message: "model updated." };
@@ -103,9 +93,12 @@ export class ModelGraphQLController {
       return { success: false, message: (e as Error).message };
     }
   };
-  removeModel = async (name: string, brand: string): Promise<Response> => {
+  removeModel = async (
+    _: any,
+    args: { name: string; brand: string }
+  ): Promise<Response> => {
     try {
-      const modelToRemove = new Model(name, brand);
+      const modelToRemove = new Model(args.name, args.brand);
       await this._removeModel.handle(modelToRemove);
       return { success: true, message: "model removed." };
     } catch (e) {

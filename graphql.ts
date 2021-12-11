@@ -7,8 +7,14 @@ const modelRepository = new ModelRepository();
 const modelGraphQLController = new ModelGraphQLController(modelRepository);
 
 // Mockup
-modelGraphQLController.createModel("Yaris", "Toyota");
-modelGraphQLController.createModel("Mustang", "Ford");
+modelGraphQLController.createModel(undefined, {
+  name: "Yaris",
+  brand: "Toyota",
+});
+modelGraphQLController.createModel(undefined, {
+  name: "Mustang",
+  brand: "Ford",
+});
 // -------
 
 // -------------------------------------------------- GraphQL

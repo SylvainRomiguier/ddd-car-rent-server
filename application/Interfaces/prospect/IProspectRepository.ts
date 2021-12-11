@@ -1,4 +1,4 @@
-import { Prospect } from "../../../domain/Aggregates/Prospect";
+import { Prospect } from "../../../domain/entities/Prospect";
 
 export interface IProspectRepository {
   create: (prospect: Prospect) => Promise<void>;

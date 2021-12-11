@@ -1,4 +1,4 @@
-import { Prospect } from "../domain/Aggregates/Prospect";
+import { Prospect } from "../domain/entities/Prospect";
 
 describe("Prospect domain tests", () => {
   it("should create a valid prospect with a correct IPv4 address", () => {

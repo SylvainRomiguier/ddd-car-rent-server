@@ -1,4 +1,6 @@
 import { Booking } from "../domain/Aggregates/Booking";
+import { Prospect } from "../domain/entities/Prospect";
+import { CheckVehiculeAvailability } from "./checkVehiculeAvailability";
 import { IBookingInputPort } from "./Interfaces/booking/IBookingInputPort";
 import { IBookingOutputPort } from "./Interfaces/booking/IBookingOutputPort";
 import { IBookingRepository } from "./Interfaces/booking/IBookingRepository";
@@ -6,29 +8,22 @@ import { IBookingRepository } from "./Interfaces/booking/IBookingRepository";
 export class BookVehicule implements IBookingInputPort {
   private _bookingsRepository: IBookingRepository;
   private _presenter: IBookingOutputPort;
+  private _checkVehiculeAvailability: CheckVehiculeAvailability;
   constructor(
     bookingsRepository: IBookingRepository,
-    presenter: IBookingOutputPort
+    presenter: IBookingOutputPort,
+    checkVehiculeAvailability: CheckVehiculeAvailability
   ) {
     this._bookingsRepository = bookingsRepository;
     this._presenter = presenter;
+    this._checkVehiculeAvailability = checkVehiculeAvailability;
   }
   handle = async (booking: Booking) => {
-    const bookings = await this._bookingsRepository.getAll();
-    const vehiculeBookings = bookings.filter((b) =>
-      b.vehicule.isEqual(booking.vehicule)
-    );
-    const alreadyBooked = vehiculeBookings.filter(
-      (b) =>
-        (booking.beginDate.getTime() >= b.beginDate.getTime() &&
-          booking.beginDate.getTime() <= b.endDate.getTime()) ||
-        (booking.endDate.getTime() >= b.beginDate.getTime() &&
-          booking.endDate.getTime() <= b.endDate.getTime())
-    );
-    // TODO : return already booked dates
-    if (alreadyBooked.length > 0)
-      throw new Error("This vehicule hans already been booked at these dates.");
-
+    if (booking.customer.value instanceof Prospect)
+      throw new Error(
+        "You should create a Customer account to book a vehicle."
+      );
+    await this._checkVehiculeAvailability.handle(booking);
     await this._bookingsRepository.create(booking);
     this._presenter.present(booking);
   };

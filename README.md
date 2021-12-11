@@ -1,10 +1,10 @@
 # DDD - Clean architecture - Car Rent example
 
-## WORK IN PROGRESS (for now you can try Console or GraphQL on Model for demo purpose)
+> **WORK IN PROGRESS (for now you can try Console or GraphQL on Model for demo purpose)**
 
-### Domain Driven Design
+## Domain Driven Design
 
-## Value Objects, Entities, Aggregate root
+### Value Objects, Entities, Aggregate root
 
 You will find the value objects, entities and aggregates in domain directory :
 
@@ -14,7 +14,7 @@ You will find the value objects, entities and aggregates in domain directory :
 - **Vehicle** is an entity with a registration id and has a _Model_;
 - **Model** is a tuple of _name_ and _brand_.
 
-## Use Cases
+### Use Cases
 
 The application directory contains all the use Cases :
 
@@ -24,13 +24,13 @@ The application directory contains all the use Cases :
 - **checkVehicleAvailability**, **bookVehicle**, **unbookVehicle**.
   For now the Model cycle is fully describe and the others are in progress.
 
-### Clean Architecture
+## Clean Architecture
 
-## entities - layer 0 : depend on nothing but other entities from same layer -
+### entities - layer 0 : depend on nothing but other entities from same layer -
 
 See DDD above.
 
-## Use Cases and Interfaces for Use Cases : Input Port, Output Port, Repository - layer 1 : depend only on layer 0 objects and eventually objects from same layer -
+### Use Cases and Interfaces for Use Cases : Input Port, Output Port, Repository - layer 1 : depend only on layer 0 objects and eventually objects from same layer -
 
 The application directory contains interfaces for Use Cases Input Ports (Use Cases interfaces to implement) and Output Ports (Presenters interfaces to implements).
 The repository interfaces are also present in each entity directory under _application/interfaces_.
@@ -38,28 +38,28 @@ The repository interfaces are also present in each entity directory under _appli
 > **These interfaces are useful as no Use Case depends on outside implementations, just on interfaces. **
 > For the Use Cases implementations see DDD above.
 
-## Presenters implementations - layer 2 : depend on Entities and implements Use Cases Output Ports -
+### Presenters implementations - layer 2 : depend on Entities and implements Use Cases Output Ports -
 
 You will find the Output Ports Interfaces implementations in the Presenters directory.
 
-## the Infrastructure layer - layer 3 -
+### the Infrastructure layer - layer 3 -
 
 - Data Providers - IRepository implementations -, for now In Memory repositories for demo purpose - could be MongoDB, PostGreSQL, other API, etc. -;
 - Controllers - to demonstrate purpose and benefits of this architecture you will have a Console controller and a GraphQL controller -.
 
-### Install and run
+## Install and run
 
 After having downloaded the project, launch yarn install.
 
-## Console
+### Console
 
 `yarn run console` : follow the console displayed menu.
 
-## GraphQL
+### GraphQL
 
 `yarn run graphql` : open a browser on [graphQL server](http://localhost:4000) to access playground.
 
-### Conclusion
+## Conclusion
 
 As you can see the business logic are completely isolated from Console app or GraphQL server.
 If you want to add new repositories implementations - such as MongoDB, PostGreSQL, MariaDB, other API, etc. - or new controllers - Express, Fastify REST API, etc. -, this could be done only in the Infrastructure Layer without changing anything in the Business Logic Layers (Entities/Domain and Use Cases/Application).

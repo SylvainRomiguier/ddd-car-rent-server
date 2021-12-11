@@ -16,14 +16,14 @@ You will find the value objects, entities and aggregates in domain directory :
 
 ### Use Cases
 
-The application directory contains all the use Cases :
+The application directory contains all the use Cases implementations :
 
 - **createModel**, **updateModel**, **removeModel**, **getAllModels**;
 - **createCustomer**, **updateCustomer**;
 - **createVehicle**, **updateVehicle**;
 - **checkVehicleAvailability**, **bookVehicle**, **unbookVehicle**.
 
-For now the Model cycle is fully describe and the others are in progress.
+For now the Model cycle is fully described, the others are in progress.
 
 ## Clean Architecture
 
